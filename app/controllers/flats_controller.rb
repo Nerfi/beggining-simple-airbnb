@@ -1,9 +1,31 @@
 class FlatsController < ApplicationController
 
   def index
-    @flats = Flat.all
+
+   if params[:query].present? # we call straigh the hash(params)
+      @query = params[:query] #I guess this we set this up 'cause we want to use it in the view, we have to make this
+      #params available on the view somehow and this is the way
+      @flats = Flat.where("name LIKE '%#{params[:query]}%'")
+    else
+      @flats = Flat.all
+    end
+
+
+  #juan try out
+    #@search = params[:query]
+    #@flats = Flat.select {|id,r| r[:query] == @flats}
+    #if @search == @flats
+     # @flats = Flat.where("query LIKE '%house%'")
+    #else
+     # @flats
+    #end
+    #wagon solution
+
+
 
   end
+
+
 
   def show
     @flat = Flat.find(params[:id])

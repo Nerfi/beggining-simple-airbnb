@@ -1,16 +1,47 @@
-
-<h1>All our flats(<%= @flats.count %>)</h1>
- <% @flats.each do |flat| %>
- <h2>flat Name<%= link_to flat.name, flat_path(flat)  %></h2>
-  <p><%= flat.address  %></p>
-  <p><%= flat.description  %></p>
-  <p><%= flat.price_per_night  %>$ per night</p>
-  <p>Number of Guests: <%= flat.number_of_guests %></p>
-  <%= link_to "Add a new Falt", new_flat_path(@flat)  %> || <%= link_to "destroy this flat", flat_path(flat),
-  method: :delete,
-  data: { confirm: "Are your sure?"}  %>
- <% end %>
+  <div class="container mt-3">
+      <div class="row">
+      <div class="col-12">
+        <h1>All our Flats</h1>
+      </div>
+    </div>
 
 
+    <div class="row">
+    <div class="col">
+      <% if @query %>
+        <p>You searched for <strong><%= @query %></strong>. We found <%= @flats.count %> flats out of our <%= Flat.count %> on our website.</p>
+      <% else %>
+        <p>All <%= Flat.count %> flats.</p>
+      <% end %>
+    </div>
+  </div>
 
+  <div class="row">
+    <% @flats.each do |flat| %>
+      <div class="col-4">
+        <div class="flat-card">
 
+          <div class="flat-card-content">
+            <div class="flat-card-title">
+              <h4><%= flat.name %></h4>
+            </div>
+            <p><%= flat.address %></p>
+            <div class="flex">
+              <div class="flex">
+                <i class="material-icons mr-2">people</i><span><%= flat.number_of_guests %></span>
+              </div>
+              <div class="flex ml-3">
+                <i class="material-icons mr-2">euro_symbol</i> <%= flat.price_per_night %>
+              </div>
+            </div>
+          </div>
+          <div class="flat-card-actions">
+            <%= link_to 'More info', flat_path(flat) %>
+            <a href="#" class="ml-3 text-warning">Edit</a>
+            <a href="#" class="ml-3 text-danger">Remove</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
