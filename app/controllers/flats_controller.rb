@@ -17,11 +17,34 @@ class FlatsController < ApplicationController
 
   def create
     @flat = Flat.new(flat_params)
+
     if @flat.save
       redirect_to flat_path(@flat)
     else
       render :new
     end
+
+  end
+
+  def edit
+    @flat = Flat.find(params[:id])
+
+  end
+
+  def update
+     if @flat = Flat.update(flat_params)
+      redirect_to flat_path(@flat)
+    else
+      render :edit
+    end
+
+  end
+
+  def destroy
+    @flat = Flat.find(params[:id])
+    @flat.destroy
+
+    redirect_to flats_path
 
   end
 

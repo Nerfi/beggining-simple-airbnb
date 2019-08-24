@@ -1,12 +1,14 @@
 
 <h1>All our flats(<%= @flats.count %>)</h1>
  <% @flats.each do |flat| %>
- <h2><%= link_to flat.name, flat_path(flat)  %></h2>
+ <h2>flat Name<%= link_to flat.name, flat_path(flat)  %></h2>
   <p><%= flat.address  %></p>
   <p><%= flat.description  %></p>
-  <p><%= flat.price_per_night  %></p>
-  <p><%= flat.number_of_guests %></p>
-  <%= link_to "Add a new Falt", new_flat_path(@flat)  %>
+  <p><%= flat.price_per_night  %>$ per night</p>
+  <p>Number of Guests: <%= flat.number_of_guests %></p>
+  <%= link_to "Add a new Falt", new_flat_path(@flat)  %> || <%= link_to "destroy this flat", flat_path(flat),
+  method: :delete,
+  data: { confirm: "Are your sure?"}  %>
  <% end %>
 
 
